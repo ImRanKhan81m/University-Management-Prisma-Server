@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\.49a4ed5aa59c2f4694c4b33d8d62f0e18ce0166b-audit.json",
+    "files": [
+        {
+            "date": 1713970657952,
+            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-24-04-20-success.log",
+            "hash": "ebbd77e7d72fc3496f13872c4d7aeeed143de12fd549ba3bd3f845735cfe4269"
+        },
+        {
+            "date": 1713971637648,
+            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-24-04-21-success.log",
+            "hash": "ac493587e54b344e441f8f918af1472ffc464909f4b518b95822dea865aed191"
+        }
+    ],
+    "hashType": "sha256"
+}
