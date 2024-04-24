@@ -4,6 +4,7 @@ import sendResponse from '../../../shared/sendResponse';
 import { AcademicSemester } from '@prisma/client';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync'; 
+import pick from '../../../shared/pick';
 
 const AcademicSemesterCreate = catchAsync(
   async (req: Request, res: Response) => {
@@ -22,7 +23,13 @@ const AcademicSemesterCreate = catchAsync(
 
 const getAllAcademicSemesters = catchAsync(
   async (req: Request, res: Response) => {
-    const result = await AcademicSemesterService.getAllAcademicSemesters();
+
+    const filters =  pick(req.query, ['searchTerm', 'code', 'startMonth', 'endMonth'])
+    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder'])
+
+    console.log(filters, options)
+
+    const result = await AcademicSemesterService.getAllAcademicSemesters(filters, options);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
