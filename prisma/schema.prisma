@@ -41,8 +41,7 @@ model AcademicFaculty {
 
 model AcademicDepartment {
   id                String          @id @default(uuid())
-  title             String
-  facultyId         String
+  title             String 
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
   academicFacultyId String
