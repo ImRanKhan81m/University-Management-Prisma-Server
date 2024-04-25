@@ -11,6 +11,7 @@ router.post(
   validateRequest(AcademicSemesterValidation.create),
   AcademicSemesterController.AcademicSemesterCreate
 );
+router.get('/:id', AcademicSemesterController.getAcademicSemesterById);
 
 
 export const AcademicSemesterRouter = router;
