@@ -54,9 +54,10 @@ model AcademicDepartment {
 
 model Student {
   id           String   @id @default(uuid())
+  studentId    String
   firstName    String
   lastName     String
-  middleName   String
+  middleName   String ?
   profileImage String
   email        String
   contactNo    String
