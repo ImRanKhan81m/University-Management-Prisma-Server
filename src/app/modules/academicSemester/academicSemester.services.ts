@@ -3,9 +3,9 @@ import { AcademicSemester, Prisma } from '@prisma/client';
 import { IGenericResponse } from '../../../interfaces/common';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IPaginationOptions } from '../../../interfaces/pagination';
-import { IAcademicSemesterFilterRequest } from './academicSemester.interface';
-import { AcademicSemesterSearchableFields } from './academicSemester.constant';
+import { IAcademicSemesterFilterRequest } from './academicSemester.interface'; 
 import prisma from '../../../shared/prisma';
+import { AcademicSemesterSearchAbleFields } from './academicSemester.constant';
 
 const createAcademicSemester = async (
   data: AcademicSemester
@@ -27,7 +27,7 @@ const getAllAcademicSemesters = async (
   const andConditions = [];
   if (searchTerm) {
     andConditions.push({
-      OR: AcademicSemesterSearchableFields.map(field => ({
+      OR: AcademicSemesterSearchAbleFields.map(field => ({
         [field]: {
           contains: searchTerm,
           mode: 'insensitive',
@@ -87,8 +87,34 @@ const getAcademicSemesterById = async (
   return result;
 };
 
+const updateOneInDB = async (
+  id: string,
+  payload: Partial<AcademicSemester>
+): Promise<AcademicSemester> => {
+  const result = await prisma.academicSemester.update({
+      where: {
+          id
+      },
+      data: payload
+  }); 
+  return result;
+};
+
+const deleteByIdFromDB = async (id: string): Promise<AcademicSemester> => {
+  const result = await prisma.academicSemester.delete({
+      where: {
+          id
+      }
+  });
+
+ 
+  return result
+};
+
 export const AcademicSemesterService = {
   createAcademicSemester,
   getAllAcademicSemesters,
   getAcademicSemesterById,
+  updateOneInDB,
+  deleteByIdFromDB,
 };
