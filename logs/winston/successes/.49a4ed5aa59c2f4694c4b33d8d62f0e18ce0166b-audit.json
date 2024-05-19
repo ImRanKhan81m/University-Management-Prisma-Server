@@ -6,46 +6,6 @@
     "auditLog": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\.49a4ed5aa59c2f4694c4b33d8d62f0e18ce0166b-audit.json",
     "files": [
         {
-            "date": 1713970657952,
-            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-24-04-20-success.log",
-            "hash": "ebbd77e7d72fc3496f13872c4d7aeeed143de12fd549ba3bd3f845735cfe4269"
-        },
-        {
-            "date": 1713971637648,
-            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-24-04-21-success.log",
-            "hash": "ac493587e54b344e441f8f918af1472ffc464909f4b518b95822dea865aed191"
-        },
-        {
-            "date": 1713977517861,
-            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-24-04-22-success.log",
-            "hash": "81534ee591c3290881c5f87af36dad96e67003dc81309956c2e86e85cc2ac063"
-        },
-        {
-            "date": 1713978111857,
-            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-24-04-23-success.log",
-            "hash": "1a9b2cc8fc2f9b05c5b809cfc40d574678b8b281df4fc37923226de7b507c310"
-        },
-        {
-            "date": 1714020482881,
-            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-25-04-10-success.log",
-            "hash": "18627d710f8e4dca6635772576af9e22e818da915349a49d2fa08452e4708d7a"
-        },
-        {
-            "date": 1714025022826,
-            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-25-04-12-success.log",
-            "hash": "15069765e9f2852baf056c479ab9152cb59e2fb1a540e8bd31c5c3a75b886eee"
-        },
-        {
-            "date": 1714053788764,
-            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-25-04-20-success.log",
-            "hash": "dc505a0300a39c9f4c7db46ea2fa6580c40619678444852b3966a58325247cb2"
-        },
-        {
-            "date": 1714057415059,
-            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-25-04-21-success.log",
-            "hash": "338916088371c2e7b6ed5b618c5bca6fa08b4ab8a3c2adc5d16562e3b4638677"
-        },
-        {
             "date": 1714661989770,
             "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-02-05-20-success.log",
             "hash": "b72b043651223c4ced66219bf4c2a707b4fe56e023ff0bea9252dc4858a6aa7a"
@@ -54,6 +14,16 @@
             "date": 1714672970211,
             "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-03-05-00-success.log",
             "hash": "3ab5990a92ae26739e055ec81addd45ff29d91aea246f19009e13855651bfc9b"
+        },
+        {
+            "date": 1715781296095,
+            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-15-05-19-success.log",
+            "hash": "893824359ca4b0739f610bb09149c5743c37f0d8321d75409d0730f4d28ffa63"
+        },
+        {
+            "date": 1715781975675,
+            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\successes\\phu-2024-15-05-20-success.log",
+            "hash": "623f52cb59f953be28141679f0f0311a733077076119ef982020a4b646501ebe"
         }
     ],
     "hashType": "sha256"

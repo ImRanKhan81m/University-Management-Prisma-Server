@@ -41,7 +41,7 @@ model AcademicFaculty {
 
 model AcademicDepartment {
   id                String          @id @default(uuid())
-  title             String 
+  title             String
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
   academicFacultyId String
@@ -57,7 +57,7 @@ model Student {
   studentId    String
   firstName    String
   lastName     String
-  middleName   String ?
+  middleName   String?
   profileImage String
   email        String
   contactNo    String
@@ -83,7 +83,7 @@ model Faculty {
   facultyId    String
   firstName    String
   lastName     String
-  middleName   String ?
+  middleName   String?
   profileImage String
   email        String
   contactNo    String
@@ -100,4 +100,26 @@ model Faculty {
   academicFaculty   AcademicFaculty @relation(fields: [academicFacultyId], references: [id])
 
   @@map("faculties")
+}
+
+model Building {
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  rooms     Room[]
+
+  @@map("buildings")
+}
+
+model Room {
+  id         String   @id @default(uuid())
+  roomNumber String
+  floor      String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  buildingId String
+  building   Building @relation(fields: [buildingId], references: [id])
+
+  @@map("rooms")
 }
