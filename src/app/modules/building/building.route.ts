@@ -34,4 +34,5 @@ router.delete(
   BuildingController.deleteBuilding
 );
 
+
 export const BuildingRoutes = router;
