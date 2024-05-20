@@ -58,7 +58,36 @@ const getAllBuildings = async (
   };
 };
 
+const getBuildingById = async (id: string): Promise<Building | null> => {
+  return await prisma.building.findUnique({
+    where: {
+      id,
+    },
+  });
+};
+
+const updateBuilding = async (id: string, data: Building): Promise<Building> => {
+  return await prisma.building.update({
+    where: {
+      id,
+    },
+    data,
+  });
+}
+
+const deleteBuilding = async (id: string): Promise<Building> => {
+  return await prisma.building.delete({
+    where: {
+      id,
+    },
+  });
+};
+
+
 export const BuildingService = {
   createBuilding,
   getAllBuildings,
+  getBuildingById,
+  updateBuilding,
+  deleteBuilding,
 };
