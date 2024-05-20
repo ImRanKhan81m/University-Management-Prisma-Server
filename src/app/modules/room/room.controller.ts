@@ -32,7 +32,49 @@ const getAllRooms = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getRoomsById = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await RoomService.getRoomsById(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Room fetched successfully',
+    data: result,
+  });
+});
+
+const updateRoom = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await RoomService.updateRoom(id, req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Room updated successfully',
+    data: result,
+  });
+});
+
+const deleteRoom = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await RoomService.deleteRoom(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Room deleted successfully',
+    data: result,
+  });
+});
+
 export const RoomController = {
   createRoom,
   getAllRooms,
+  getRoomsById,
+  updateRoom,
+  deleteRoom,
 };
