@@ -19,7 +19,7 @@ const createCourse = catchAsync(async (req: Request, res: Response) => {
 
 const getAllCourses = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, CourseFilterableFields);
-  const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']); 
+  const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
 
   const result = await CourseService.getAllCourses(filters, options);
 
@@ -43,7 +43,7 @@ const getCourseById = catchAsync(async (req: Request, res: Response) => {
     message: 'Course fetched successfully',
     data: result,
   });
-}); 
+});
 
 const updateCourseById = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -59,7 +59,6 @@ const updateCourseById = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-
 const deleteCourse = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -73,10 +72,25 @@ const deleteCourse = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const assignFaculties = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data = req.body.faculties;
+console.log(data);
+  const result = await CourseService.assignFaculties(id, data);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Faculties assigned successfully',
+    data: result,
+  });
+});
+
 export const CourseController = {
   createCourse,
   getAllCourses,
-  getCourseById, 
+  getCourseById,
   deleteCourse,
   updateCourseById,
+  assignFaculties,
 };

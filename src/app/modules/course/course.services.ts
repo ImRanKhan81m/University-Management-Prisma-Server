@@ -9,7 +9,7 @@ import {
 } from './course.interface';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IGenericResponse } from '../../../interfaces/common';
-import { Course, Prisma } from '@prisma/client';
+import { Course, CourseFaculty, Prisma } from '@prisma/client';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { CourseSearchableFields } from './course.constant';
 import { asyncForEach } from '../../../shared/utils';
@@ -308,10 +308,33 @@ const deleteCourseById = async (id: string): Promise<Course | null> => {
   return result;
 };
 
+const assignFaculties = async (
+  id: string,
+  payload: string[]
+): Promise<CourseFaculty[]> => {
+  await prisma.courseFaculty.createMany({
+    data: payload.map(facultyId => ({
+      courseId: id,
+      facultyId,
+    })),
+  });
+
+  const assignFacultyData = await prisma.courseFaculty.findMany({
+    where: {
+      courseId: id,
+    },
+    include: {
+      faculty: true,
+    },
+  });
+  return assignFacultyData;
+};
+
 export const CourseService = {
   createCourse,
   getAllCourses,
   getCourseById,
   deleteCourseById,
   updateCourseById,
+  assignFaculties,
 };

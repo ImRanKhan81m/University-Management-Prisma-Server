@@ -12,7 +12,7 @@ router.get('/', FacultyController.getAllFromDB);
 
 router.post(
     '/',
-    auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+    // auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
     validateRequest(FacultyValidation.create),
     FacultyController.insertIntoDB
 );
