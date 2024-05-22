@@ -26,7 +26,7 @@ const getAllCourses = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Rooms fetched successfully',
+    message: 'Course fetched successfully',
     meta: result.meta,
     data: result.data,
   });
@@ -40,10 +40,25 @@ const getCourseById = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Room fetched successfully',
+    message: 'Course fetched successfully',
     data: result,
   });
 }); 
+
+const updateCourseById = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data = req.body;
+
+  const result = await CourseService.updateCourseById(id, data);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Course updated successfully',
+    data: result,
+  });
+});
+
 
 const deleteCourse = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -63,4 +78,5 @@ export const CourseController = {
   getAllCourses,
   getCourseById, 
   deleteCourse,
+  updateCourseById,
 };
