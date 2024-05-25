@@ -160,60 +160,6 @@ const getCourseById = async (id: string): Promise<Course | null> => {
   return result;
 };
 
-// const updateCourseById = async ( id: string, data: ICourseCreateData): Promise<Course | null> => {
-//   const { preRequisiteCourse, ...courseData } = data;
-
-//   const updatedCourse = await prisma.$transaction(async transactionClient => {
-//     const response = await transactionClient.course.update({
-//       where: {
-//         id,
-//       },
-//       data: courseData,
-//     });
-
-//     if (!response) {
-//       throw new ApiError(httpStatus.BAD_REQUEST, 'Unable to update course');
-//     }
-
-//     if (preRequisiteCourse && preRequisiteCourse.length > 0) {
-//       for (let index = 0; index < preRequisiteCourse.length; index++) {
-//         const createPreRequisite =
-//           await transactionClient.courseToPrerequisite.create({
-//             data: {
-//               courseId: response.id,
-//               preRequisiteId: preRequisiteCourse[index].courseId,
-//             },
-//           });
-//         console.log(createPreRequisite);
-//       }
-//     }
-//     return response;
-//   });
-
-//   if (updatedCourse) {
-//     const responseData = await prisma.course.findUnique({
-//       where: {
-//         id: updatedCourse.id,
-//       },
-//       include: {
-//         preRequiste: {
-//           include: {
-//             preRequisite: true,
-//           },
-//         },
-//         preRequisteFor: {
-//           include: {
-//             course: true,
-//           },
-//         },
-//       },
-//     });
-//     return responseData;
-//   }
-
-//   throw new ApiError(httpStatus.BAD_REQUEST, 'Unable to update course');
-// };
-
 const updateCourseById = async (
   id: string,
   data: ICourseCreateData
@@ -330,6 +276,30 @@ const assignFaculties = async (
   return assignFacultyData;
 };
 
+const removeFaculty = async (
+  id: string,
+  payload: string[]
+): Promise<CourseFaculty[] | null> => {
+  await prisma.courseFaculty.deleteMany({
+    where: {
+      courseId: id,
+      facultyId: {
+        in: payload,
+      },
+    },
+  });
+
+  const assignFacultyData = await prisma.courseFaculty.findMany({
+    where: {
+      courseId: id,
+    },
+    include: {
+      faculty: true,
+    },
+  });
+  return assignFacultyData;
+};
+
 export const CourseService = {
   createCourse,
   getAllCourses,
@@ -337,4 +307,5 @@ export const CourseService = {
   deleteCourseById,
   updateCourseById,
   assignFaculties,
+  removeFaculty,
 };

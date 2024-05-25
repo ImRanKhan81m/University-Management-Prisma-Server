@@ -54,6 +54,16 @@
             "date": 1716402187583,
             "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\errors\\phu-2024-23-05-00-error.log",
             "hash": "a72aed4e8fd7b3cb14bc11c60945838d928a46807232d1e5cd29b1062afd68ca"
+        },
+        {
+            "date": 1716615152526,
+            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\errors\\phu-2024-25-05-11-error.log",
+            "hash": "46a07bd04c24a6d8bd3353045ebd10ec83ffac449dd6972cb9db134e58cf7718"
+        },
+        {
+            "date": 1716623024845,
+            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management-core-service-prisma\\logs\\winston\\errors\\phu-2024-25-05-13-error.log",
+            "hash": "348ea9a9cdf3a3db3d0a5272b91366ef185d6f788a2a9cde6d8cab8e9e5cbcef"
         }
     ],
     "hashType": "sha256"
