@@ -100,6 +100,8 @@ const removeFaculty = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+
 export const CourseController = {
   createCourse,
   getAllCourses,
