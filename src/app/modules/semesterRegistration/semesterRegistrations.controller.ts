@@ -20,46 +20,114 @@ const insertIntoDb = catchAsync(async (req: Request, res: Response) => {
 const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, semesterRegistrationFilterableFields);
   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
-  const result = await semesterRegistrationService.getAllFromDB(filters, options);
+  const result = await semesterRegistrationService.getAllFromDB(
+    filters,
+    options
+  );
   sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'SemesterRegistrations fetched successfully',
-      meta: result.meta,
-      data: result.data
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'SemesterRegistrations fetched successfully',
+    meta: result.meta,
+    data: result.data,
   });
-})
+});
 
 const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await semesterRegistrationService.getByIdFromDB(id);
   sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'SemesterRegistration fetched successfully',
-      data: result
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'SemesterRegistration fetched successfully',
+    data: result,
   });
-})
+});
 
 const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await semesterRegistrationService.updateOneInDB(id, req.body);
   sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'SemesterRegistration updated successfully',
-      data: result
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'SemesterRegistration updated successfully',
+    data: result,
   });
-})
+});
 
+const startMyRegistration = catchAsync(async (req: Request, res: Response) => {
+  const user = (req as any).user;
+  const result = await semesterRegistrationService.startMyRegistration(
+    user.userId
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Student SemesterRegistration started successfully',
+    data: result,
+  });
+});
 
 const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await semesterRegistrationService.deleteByIdFromDB(id);
   sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'SemesterRegistration deleted successfully',
+    data: result,
+  });
+});
+
+const enrollIntoCourse = catchAsync(async (req: Request, res: Response) => {
+  const user = (req as any).user;
+  const result = await semesterRegistrationService.enrollIntoCourse(
+    user.userId,
+    req.body
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Student SemesterRegistration course enrolled successfully',
+    data: result,
+  });
+});
+
+const withdrawFromCourse = catchAsync(async (req: Request, res: Response) => {
+  const user = (req as any).user;
+  const result = await semesterRegistrationService.withdrewFromCourse(
+    user.userId,
+    req.body
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Student Withdraw from successfully',
+    data: result,
+  });
+});
+
+const confirmMyRegistration = catchAsync(async (req: Request, res: Response) => {
+
+  const user = (req as any).user;
+  const result = await semesterRegistrationService.confirmMyRegistration(user.userId)
+  sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'SemesterRegistration deleted successfully',
+      message: 'Confirm your registration!',
+      data: result
+  });
+})
+
+const getMyRegistration = catchAsync(async (req: Request, res: Response) => {
+  console.log("get my reg")
+  const user = (req as any).user;
+  const result = await semesterRegistrationService.getMyRegistration(user.userId)
+  console.log(result)
+  sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'My registration data fatched!',
       data: result
   });
 })
@@ -69,5 +137,10 @@ export const semesterRegistrationController = {
   getAllFromDB,
   getByIdFromDB,
   updateOneInDB,
-  deleteByIdFromDB
+  startMyRegistration,
+  deleteByIdFromDB,
+  enrollIntoCourse,
+  withdrawFromCourse,
+  confirmMyRegistration,
+  getMyRegistration
 };
