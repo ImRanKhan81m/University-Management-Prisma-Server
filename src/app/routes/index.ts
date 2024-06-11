@@ -8,6 +8,9 @@ import { BuildingRoutes } from '../modules/building/building.route';
 import { RoomRoutes } from '../modules/room/room.route';
 import { CourseRoutes } from '../modules/course/course.route';
 import { semesterRegistrationRoutes } from '../modules/semesterRegistration/semesterRegistrations.routes';
+import { offeredCourseRoutes } from '../modules/offeredCourse/offeredCourse.routes';
+import { offeredCourseSectionRoutes } from '../modules/offeredCourseSection/offeredCourseSection.routes';
+import { offeredCourseClassScheduleRoutes } from '../modules/offeredCourseClassSchedule/offeredCourseClassSchedule.routes';
 
 const router = express.Router();
 
@@ -35,19 +38,32 @@ const moduleRoutes = [
   },
   {
     path: '/building',
-    route: BuildingRoutes, 
+    route: BuildingRoutes,
   },
   {
     path: '/room',
-    route: RoomRoutes, 
-  },{
+    route: RoomRoutes,
+  },
+  {
     path: '/course',
     route: CourseRoutes,
   },
   {
     path: '/semester-registration',
     route: semesterRegistrationRoutes,
-  }
+  },
+  {
+    path: '/offered-courses',
+    route: offeredCourseRoutes,
+  },
+  {
+    path: '/offered-course-sections',
+    route: offeredCourseSectionRoutes
+  },
+  {
+    path: '/offered-course-class-schedules',
+    route: offeredCourseClassScheduleRoutes
+  },
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));
