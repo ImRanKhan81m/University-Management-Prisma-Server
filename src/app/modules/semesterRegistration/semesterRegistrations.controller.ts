@@ -107,30 +107,62 @@ const withdrawFromCourse = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const confirmMyRegistration = catchAsync(async (req: Request, res: Response) => {
-
-  const user = (req as any).user;
-  const result = await semesterRegistrationService.confirmMyRegistration(user.userId)
-  sendResponse(res, {
+const confirmMyRegistration = catchAsync(
+  async (req: Request, res: Response) => {
+    const user = (req as any).user;
+    const result = await semesterRegistrationService.confirmMyRegistration(
+      user.userId
+    );
+    sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: 'Confirm your registration!',
-      data: result
-  });
-})
+      data: result,
+    });
+  }
+);
 
 const getMyRegistration = catchAsync(async (req: Request, res: Response) => {
-  console.log("get my reg")
+  console.log('get my reg');
   const user = (req as any).user;
-  const result = await semesterRegistrationService.getMyRegistration(user.userId)
-  console.log(result)
+  const result = await semesterRegistrationService.getMyRegistration(
+    user.userId
+  );
+  console.log(result);
   sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'My registration data fatched!',
+    data: result,
+  });
+});
+
+const startNewSemester = catchAsync(async (req: Request, res: Response) => {
+  // /:id/start-new-semester
+  const { id } = req.params;
+  const result = await semesterRegistrationService.startNewSemester(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Semester Started Successfully!',
+    data: result,
+  });
+});
+
+const getMySemesterRegCouses = catchAsync(
+  async (req: Request, res: Response) => {
+    const user = (req as any).user;
+    const result = await semesterRegistrationService.getMySemesterRegCouses(
+      user.userId
+    );
+    sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'My registration data fatched!',
-      data: result
-  });
-})
+      message: 'My registration courses data fatched!',
+      data: result,
+    });
+  }
+);
 
 export const semesterRegistrationController = {
   insertIntoDb,
@@ -142,5 +174,7 @@ export const semesterRegistrationController = {
   enrollIntoCourse,
   withdrawFromCourse,
   confirmMyRegistration,
-  getMyRegistration
+  getMyRegistration,
+  startNewSemester,
+  getMySemesterRegCouses,
 };
