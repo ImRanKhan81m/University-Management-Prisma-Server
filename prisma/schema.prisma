@@ -27,6 +27,7 @@ model AcademicSemester {
   semesterRegistration      SemesterRegistration[]
   studentEnrolledCourse     StudentEnrolledCourse[]
   studentEnrolledCourseMark StudentEnrolledCourseMark[]
+  studentSemesterPayment    StudentSemesterPayment[]
 
   @@map("academic_semesters")
 }
@@ -83,6 +84,8 @@ model Student {
   studentSemesterRegistrationCourse StudentSemesterRegistrationCourse[]
   studentEnrolledCourse             StudentEnrolledCourse[]
   studentEnrolledCourseMark         StudentEnrolledCourseMark[]
+  studentSemesterPayment            StudentSemesterPayment[]
+  studentAcademicInfo               StudentAcademicInfo[]
 
   @@map("students")
 }
@@ -314,6 +317,53 @@ model StudentEnrolledCourseMark {
   @@map("student_enrolled_course_marks")
 }
 
+model StudentSemesterPayment {
+  id                 String           @id @default(uuid())
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  studentId          String
+  student            Student          @relation(fields: [studentId], references: [id])
+  academicSemesterId String
+  academicSemester   AcademicSemester @relation(fields: [academicSemesterId], references: [id])
+
+  fullPaymentAmount             Int?                            @default(0)
+  partialPaymentAmount          Int?                            @default(0)
+  totalDueAmount                Int?                            @default(0)
+  totalPaidAmount               Int?                            @default(0)
+  paymentStatus                 PaymentStatus?                  @default(PENDING)
+  studentSemesterPaymentHistory StudentSemesterPaymentHistory[]
+
+  @@map("student_semester_payments")
+}
+
+model StudentSemesterPaymentHistory {
+  id                       String                 @id @default(uuid())
+  createdAt                DateTime               @default(now())
+  updatedAt                DateTime               @updatedAt
+  studentSemesterPayment   StudentSemesterPayment @relation(fields: [studentSemesterPaymentId], references: [id])
+  studentSemesterPaymentId String
+
+  transactionId String
+  dueAmount     Int            @default(0)
+  paidAmount    Int            @default(0)
+  paymentMethod PayementMethod @default(ONLINE)
+  isPaid        Boolean?       @default(false)
+
+  @@map("student_semester_payament_histories")
+}
+
+model StudentAcademicInfo {
+  id                   String   @id @default(uuid())
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  studentId            String
+  student              Student  @relation(fields: [studentId], references: [id])
+  totalCompletedCredit Int?     @default(0)
+  cgpa                 Float?   @default(0)
+
+  @@map("student_academic_infos")
+}
+
 enum SemesterRegistrationStatus {
   UPCOMING
   ONGOING
@@ -339,4 +389,15 @@ enum WeekDays {
   WEDNESDAY
   THURSDAY
   FRIDAY
+}
+
+enum PaymentStatus {
+  PENDING
+  PARTIAL_PAID
+  FULL_PAID
+}
+
+enum PayementMethod {
+  CASH
+  ONLINE
 }
