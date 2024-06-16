@@ -300,6 +300,7 @@ model StudentEnrolledCourse {
   @@map("student_enrolled_courses")
 }
 
+
 model StudentEnrolledCourseMark {
   id                      String                @id @default(uuid())
   createdAt               DateTime              @default(now())

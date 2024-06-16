@@ -11,6 +11,9 @@ import { semesterRegistrationRoutes } from '../modules/semesterRegistration/seme
 import { offeredCourseRoutes } from '../modules/offeredCourse/offeredCourse.routes';
 import { offeredCourseSectionRoutes } from '../modules/offeredCourseSection/offeredCourseSection.routes';
 import { offeredCourseClassScheduleRoutes } from '../modules/offeredCourseClassSchedule/offeredCourseClassSchedule.routes';
+import { studentEnrolledCourseRoutes } from '../modules/studentEnrolledCourse/studentEnrolledCourse.routes';
+import { studentEnrolledCourseMarkRoutes } from '../modules/studentEnrolledCourseMark/studentEnrolledCourseMark.routes';
+import { studentSemesterPaymentRoutes } from '../modules/studentSemesterPayment/studentSemesterPayment.routes';
 
 const router = express.Router();
 
@@ -64,6 +67,18 @@ const moduleRoutes = [
     path: '/offered-course-class-schedules',
     route: offeredCourseClassScheduleRoutes
   },
+    {
+    path: '/student-enrolled-courses',
+    route: studentEnrolledCourseRoutes
+  },
+  {
+    path: '/student-enrolled-course-marks',
+    route: studentEnrolledCourseMarkRoutes
+  },
+  {
+    path: '/student-semester-payments',
+    route: studentSemesterPaymentRoutes
+  }
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));
