@@ -1,14 +1,14 @@
 import {
     Prisma,
     Student,
-    StudentEnrolledCourseStatus, 
+    StudentEnrolledCourseStatus
 } from '@prisma/client';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import prisma from '../../../shared/prisma';
 import { studentRelationalFields, studentRelationalFieldsMapper, studentSearchableFields } from './student.constants';
-import { IStudentFilterRequest } from './student.interface'; 
+import { IStudentFilterRequest } from './student.interface';
 import { StudentUtils } from './student.utils';
 
 const insertIntoDB = async (data: Student): Promise<Student> => {
@@ -137,7 +137,7 @@ const deleteFromDB = async (id: string): Promise<Student> => {
         }
     })
     return result;
-}  
+}
 
 const myCourses = async (
     authUserId: string,
@@ -213,7 +213,7 @@ const getMyCourseSchedules = async (
             },
             offeredCourseSection: {
                 include: {
-                    offeredCourseClassSchedule: {
+                    offeredCourseClassSchedules: {
                         include: {
                             room: {
                                 include: {
@@ -274,7 +274,7 @@ const createStudentFromEvent = async (e: any) => {
         contactNo: e.contactNo,
         gender: e.gender,
         bloodGroup: e.bloodGroup,
-        academicsSemesterId: e.academicSemester.syncId,
+        academicSemesterId: e.academicSemester.syncId,
         academicDepartmentId: e.academicDepartment.syncId,
         academicFacultyId: e.academicFaculty.syncId
     };
@@ -305,7 +305,7 @@ const updateStudentFromEvent = async (e: any): Promise<void> => {
             bloodGroup: e.bloodGroup,
             academicDepartmentId: e.academicDepartment.syncId,
             academicFacultyId: e.academicFaculty.syncId,
-            academicsSemesterId: e.academicSemester.syncId
+            academicSemesterId: e.academicSemester.syncId
         };
         await prisma.student.updateMany({
             where: {
@@ -326,5 +326,5 @@ export const StudentService = {
     getMyCourseSchedules,
     getMyAcademicInfo,
     createStudentFromEvent,
-    updateStudentFromEvent 
+    updateStudentFromEvent
 };

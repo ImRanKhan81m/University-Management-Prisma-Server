@@ -79,7 +79,7 @@ const insertIntoDB = async (payload: IOfferedCourseSectionCreate): Promise<Offer
                     course: true
                 }
             },
-            offeredCourseClassSchedule: {
+            offeredCourseClassSchedules: {
                 include: {
                     room: {
                         include: {

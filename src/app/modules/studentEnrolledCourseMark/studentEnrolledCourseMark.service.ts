@@ -1,5 +1,5 @@
-import { ExamType, Prisma, PrismaClient, StudentEnrolledCourseMark, StudentEnrolledCourseStatus } from "@prisma/client"
-import { DefaultArgs } from "@prisma/client/runtime/library"
+import { ExamType, PrismaClient, StudentEnrolledCourseMark, StudentEnrolledCourseStatus } from "@prisma/client"
+import { DefaultArgs, PrismaClientOptions } from "@prisma/client/runtime/library"
 import httpStatus from "http-status"
 import ApiError from "../../../errors/ApiError"
 import { paginationHelpers } from "../../../helpers/paginationHelper"
@@ -10,7 +10,7 @@ import { IStudentEnrolledCourseMarkFilterRequest } from "./studentEnrolledCourse
 import { StudentEnrolledCourseMarkUtils } from "./studentEnrolledCousreMark.utils"
 
 const createStudentEnrolledCourseDefaultMark = async (
-    prismaClient: Omit<PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">,
+    prismaClient: Omit<PrismaClient<PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">,
     payload: {
         studentId: string,
         studentEnrolledCourseId: string,

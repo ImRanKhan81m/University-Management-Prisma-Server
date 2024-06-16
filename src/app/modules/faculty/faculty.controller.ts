@@ -60,37 +60,33 @@ const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
         message: 'Faculty delete successfully',
         data: result
     });
-}); 
+});
 
 const assignCourses = catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
-    const data = req.body.courses;
-  console.log(data);
-    const result = await FacultyService.assignCourses(id, data);
-  
+    console.log(req.body.faculties)
+    const result = await FacultyService.assignCourses(id, req.body.courses);
     sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Courses assigned successfully',
-      data: result,
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Course faculty assigned successfully',
+        data: result
     });
-  });
-  
-  const removeCourses = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const data = req.body.courses;
-  
-    const result = await FacultyService.removeCourses(id, data);
-  
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Courses removed successfully',
-      data: result,
-    });
-  });
+})
 
-  const myCourses = catchAsync(async (req: Request, res: Response) => {
+const removeCourses = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    console.log(req.body.faculties)
+    const result = await FacultyService.removeCourses(id, req.body.courses);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Course faculty deleted successfully',
+        data: result
+    });
+});
+
+const myCourses = catchAsync(async (req: Request, res: Response) => {
     const user = (req as any).user;
     const filter = pick(req.query, ['academicSemesterId', 'courseId'])
     const result = await FacultyService.myCourses(user, filter);
@@ -120,7 +116,7 @@ export const FacultyController = {
     getAllFromDB,
     getByIdFromDB,
     updateOneInDB,
-    deleteByIdFromDB, 
+    deleteByIdFromDB,
     assignCourses,
     removeCourses,
     myCourses,

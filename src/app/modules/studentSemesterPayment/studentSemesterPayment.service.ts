@@ -1,5 +1,5 @@
 import { PaymentStatus, Prisma, PrismaClient, StudentSemesterPayment } from "@prisma/client";
-import { DefaultArgs } from "@prisma/client/runtime/library";
+import { DefaultArgs, PrismaClientOptions } from "@prisma/client/runtime/library";
 import axios from "axios";
 import httpStatus from "http-status";
 import config from "../../../config";
@@ -13,7 +13,7 @@ import { IStudentSemesterPaymentFilterRequest } from "./studentSemesterPayment.i
 
 
 const createSemesterPayment = async (
-    prismaClient: Omit<PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">,
+    prismaClient: Omit<PrismaClient<PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">,
     payload: {
         studentId: string;
         academicSemesterId: string;

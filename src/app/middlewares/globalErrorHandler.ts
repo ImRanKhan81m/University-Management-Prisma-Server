@@ -7,11 +7,11 @@ import ApiError from '../../errors/ApiError';
 import handleValidationError from '../../errors/handleValidationError';
 
 import { Prisma } from '@prisma/client';
-import { ZodError } from 'zod'; 
+import { ZodError } from 'zod';
+import handleClientError from '../../errors/handleClientError';
 import handleZodError from '../../errors/handleZodError';
 import { IGenericErrorMessage } from '../../interfaces/error';
 import { errorlogger } from '../../shared/logger';
-import handleClientError from '../../errors/handleClientError';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,

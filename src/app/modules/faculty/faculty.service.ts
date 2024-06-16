@@ -1,9 +1,9 @@
-import {  CourseFaculty, Faculty, Prisma, Student } from "@prisma/client";
+import { CourseFaculty, Faculty, Prisma, Student } from "@prisma/client";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
 import { IGenericResponse } from "../../../interfaces/common";
 import { IPaginationOptions } from "../../../interfaces/pagination";
 import prisma from "../../../shared/prisma";
-import { facultyRelationalFields, facultyRelationalFieldsMapper, facultySearchableFields } from "./faculty.constants"; 
+import { facultyRelationalFields, facultyRelationalFieldsMapper, facultySearchableFields } from "./faculty.constants";
 import { FacultyCreatedEvent, IFacultyFilterRequest, IFacultyMyCourseStudentsRequest } from "./faculty.interface";
 
 const insertIntoDB = async (data: Faculty): Promise<Faculty> => {
@@ -132,50 +132,52 @@ const deleteByIdFromDB = async (id: string): Promise<Faculty> => {
 const assignCourses = async (
     id: string,
     payload: string[]
-  ): Promise<CourseFaculty[]> => {
+): Promise<CourseFaculty[]> => {
     await prisma.courseFaculty.createMany({
-      data: payload.map(courseId => ({
-        facultyId: id,
-        courseId,
-      })),
-    });
-  
+        data: payload.map((courseId) => ({
+            facultyId: id,
+            courseId: courseId
+        }))
+    })
+
     const assignCoursesData = await prisma.courseFaculty.findMany({
-      where: {
-        facultyId: id,
-      },
-      include: {
-        faculty: true,
-      },
-    });
+        where: {
+            facultyId: id
+        },
+        include: {
+            course: true
+        }
+    })
+
     return assignCoursesData;
-  };
-  
-  const removeCourses = async (
+}
+
+const removeCourses = async (
     id: string,
     payload: string[]
-  ): Promise<CourseFaculty[] | null> => {
+): Promise<CourseFaculty[] | null> => {
     await prisma.courseFaculty.deleteMany({
-      where: {
-        facultyId: id,
-        courseId: {
-          in: payload,
-        },
-      },
-    });
-  
-    const assignCoursesData = await prisma.courseFaculty.findMany({
-      where: {
-        facultyId: id,
-      },
-      include: {
-        course: true,
-      },
-    });
-    return assignCoursesData;
-  };
+        where: {
+            facultyId: id,
+            courseId: {
+                in: payload
+            }
+        }
+    })
 
-  const myCourses = async (
+    const assignCoursesData = await prisma.courseFaculty.findMany({
+        where: {
+            facultyId: id
+        },
+        include: {
+            course: true
+        }
+    })
+
+    return assignCoursesData
+}
+
+const myCourses = async (
     authUser: {
         userId: string,
         role: string
@@ -197,7 +199,7 @@ const assignCourses = async (
 
     const offeredCourseSections = await prisma.offeredCourseSection.findMany({
         where: {
-            offeredCourseClassSchedule: {
+            offeredCourseClassSchedules: {
                 some: {
                     faculty: {
                         facultyId: authUser.userId
@@ -218,7 +220,7 @@ const assignCourses = async (
                     course: true
                 }
             },
-            offeredCourseClassSchedule: {
+            offeredCourseClassSchedules: {
                 include: {
                     room: {
                         include: {

@@ -1,80 +1,71 @@
 import { Request, Response } from 'express';
-import catchAsync from '../../../shared/catchAsync';
-import { RoomService } from './room.services';
-import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
+import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
-import { RoomFilterableFields } from './room.constant';
+import sendResponse from '../../../shared/sendResponse';
+import { roomFilterableFields } from './room.constants';
+import { RoomService } from './room.service';
 
-const createRoom = catchAsync(async (req: Request, res: Response) => {
-  const result = await RoomService.createRoom(req.body);
-
-  sendResponse(res, {
-    statusCode: httpStatus.CREATED,
-    success: true,
-    message: 'Room created successfully',
-    data: result,
-  });
+const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
+    const result = await RoomService.insertIntoDB(req.body);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Room created successfully',
+        data: result
+    });
 });
 
-const getAllRooms = catchAsync(async (req: Request, res: Response) => {
-  const filters = pick(req.query, RoomFilterableFields);
-  const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']); 
+const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
+    const filters = pick(req.query, roomFilterableFields);
+    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+    const result = await RoomService.getAllFromDB(filters, options);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Rooms fetched successfully',
+        meta: result.meta,
+        data: result.data
+    });
+})
 
-  const result = await RoomService.getAllRooms(filters, options);
+const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await RoomService.getByIdFromDB(id);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Room fetched successfully',
+        data: result
+    });
+})
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Rooms fetched successfully',
-    meta: result.meta,
-    data: result.data,
-  });
-});
+const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await RoomService.updateOneInDB(id, req.body);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Room updated successfully',
+        data: result
+    });
+})
 
-const getRoomsById = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const result = await RoomService.getRoomsById(id);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Room fetched successfully',
-    data: result,
-  });
-});
-
-const updateRoom = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const result = await RoomService.updateRoom(id, req.body);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Room updated successfully',
-    data: result,
-  });
-});
-
-const deleteRoom = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const result = await RoomService.deleteRoom(id);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Room deleted successfully',
-    data: result,
-  });
-});
+const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await RoomService.deleteByIdFromDB(id);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Room deleted successfully',
+        data: result
+    });
+})
 
 export const RoomController = {
-  createRoom,
-  getAllRooms,
-  getRoomsById,
-  updateRoom,
-  deleteRoom,
+    insertIntoDB,
+    getAllFromDB,
+    getByIdFromDB,
+    updateOneInDB,
+    deleteByIdFromDB
 };

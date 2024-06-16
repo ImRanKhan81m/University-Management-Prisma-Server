@@ -61,7 +61,7 @@ const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
         message: 'Student deleted successfully',
         data: result
     });
-})  
+})
 
 const myCourses = catchAsync(async (req: Request, res: Response) => {
     const user = (req as any).user;
@@ -104,7 +104,7 @@ export const StudentController = {
     getAllFromDB,
     getByIdFromDB,
     updateIntoDB,
-    deleteFromDB, 
+    deleteFromDB,
     myCourses,
     getMyCourseSchedules,
     myAcademicInfo

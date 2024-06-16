@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management (source-code)\\logs\\winston\\successes\\.eab8ad9550af97f7cb731a8da0077bc4a0f9e241-audit.json",
+    "files": [
+        {
+            "date": 1718433408688,
+            "name": "F:\\ANextLevelCourse\\Mission- 06 (SQL Superstar)\\University-Management Core Service\\university-management (source-code)\\logs\\winston\\successes\\phu-2024-15-06-12-success.log",
+            "hash": "6772e46d4c74edf3498c5555cc77bff1578fcc5ab499bf5b90b10918b37ea79e"
+        }
+    ],
+    "hashType": "sha256"
+}
